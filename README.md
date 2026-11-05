@@ -1,83 +1,43 @@
-![Frankie Goal — current product banner](docs/readme/banner.png)
+![Frankie Goal](docs/readme/banner.png)
 
 # Frankie Goal
 
-将 **GoalBreaker-AI** 的目标拆解与 **planner** 的多尺度时间规划融合成一个 Next.js 应用：目标 → 阶段 → 行动 → 日程 → 完成。
+把想做的事拆成行动，再为每天留出可以开始的时间。
 
-## Features
+[Guide](docs/guide.md) · [Run locally](#run-locally)
 
-- 拆解目标、阶段与行动，并保留父子目标和任务依赖。
-- 在可用容量内滚动规划每日行动，优先呈现今天可以开始的一件事。
-- 通过本地保存、笔记和 JSON 备份管理计划。
+## What it does
 
-## Getting started
+- 拆解目标、阶段和行动，保留来源、依赖与完成标准。
+- 按可用时间滚动安排每日行动，先看今天能开始的一件事。
+- 用笔记、本地保存和 JSON 备份持续整理计划。
 
-需要 Node.js 22.18+（或 Node.js 24+）和 npm。
+## Run locally
+
+需要 Node.js 22.18+ 或 Node.js 24+。首次配置时：
 
 ```sh
-npm install
+npm ci
 cp .env.example .env.local
 npm run dev
 ```
 
-打开 http://localhost:3000。AI 拆解通过 [OpenRouter](https://openrouter.ai/docs/api/reference/streaming) 调用，使用服务端 `OPENROUTER_API_KEY`，可通过 `OPENROUTER_MODEL` 指定账户可用的模型；默认采用 `google/gemini-3.1-pro-preview`，也可换用 OpenRouter 上支持[结构化输出](https://openrouter.ai/docs/guides/features/structured-outputs)的模型。密钥不会被打包到浏览器。未配置密钥时，手动目标、行动、日程、笔记和备份仍可使用。
+打开 http://localhost:3000。AI 拆解使用服务端 `OPENROUTER_API_KEY`；模型可通过 `OPENROUTER_MODEL` 配置。
 
-## Project notes
+## Before you start
 
-### 工作流程
+不配置 key 也可以手动管理目标、行动、日程和备份。数据保存在当前浏览器，没有账户或云端同步。旧数据导入和父子任务迁移规则见项目指南。
 
-1. 在首页输入目标，使用 AI 拆解或手动创建。
-2. AI 生成分阶段方案、用时估算、复杂度与行动类型统计；复杂行动可继续拆解，保留上层目标关系和时间约束。支持中文、英文输出、流式预览、Markdown 复制和单目标 JSON 下载。
-3. 目标生成后，在“把这份目标变成每日计划”设置开始/结束日期、每天投入分钟数、任务颗粒度和可安排的星期。AI 将目标步骤细化为有具体产出的行动，排期器按执行顺序扣除已有日程占用、跳过不可用日，生成逐日预览。可修改日期、标题、说明和用时；点击“应用每日计划”一次性加入日历。原始步骤的单条手动排期保留在折叠区域。
-4. “时间规划”以日期分组展示每日行动，日历的日区块也直接展示行动。重新规划只替换该目标未完成的行动，保留完成记录；每个行动保留原始目标与步骤引用，一个步骤可跨多天拆成多个行动。日期/容量不足或遗漏步骤会阻止应用并给出提示。循环目标仅安排在本次固定窗口内（最多 90 天）。
-5. “时间规划”保留季度、月、周、日视图、Markdown 笔记和颜色标签。目标日程提供独立的完成勾选；日历区块的时间进度表示时间流逝，不代表任务完成。
-6. 数据自动保存在当前浏览器中。使用“导出备份”导出目标、日程与时间规划的完整 JSON。
-
-### 旧数据与备份
-
-“导入数据”支持：
-
-- franklin-goal 完整备份：替换当前目标、任务日程和时间规划。
-- planner 的 `{dateRange, metadata}` JSON：替换时间规划，保留目标与关联日程。
-- GoalBreaker-AI 的单目标 JSON 或目标数组：追加目标，保留现有数据，冲突 ID 会重建。
-
-两个原项目的文件与历史保持原样。不同地址、端口下的浏览器存储不会自动共享；请从原应用导出，再在新应用导入。旧 GoalBreaker-AI 的归档仅保存在原浏览器 `strata_history` 中；如需一次迁移全部目标，可将该数组保存为 JSON 后导入。未复制原项目的密钥、构建产物或 Git 配置。
-
-时间块使用稳定的日历标识，改变显示范围不会清空笔记。导入旧时间块时会转换旧标识。日期按浏览器本地时区处理，时间范围上限三年。
-
-### 结构
-
-- `src/features/goals/`：由 GoalBreaker-AI 迁入的目标类型、结果展示、图表及服务端生成逻辑。
-- `src/app/api/goals/`：服务端 OpenRouter 流式生成接口。
-- `src/components/`、`src/lib/time-utils.ts`：由 planner 迁入的时间视图、笔记和标签组件。
-- `src/lib/store.ts`：统一持久化目标、任务日程、时间规划和语言偏好。
-- `src/lib/goal-data.ts`：数据校验、旧格式导入及本地日期工具。
-
-本项目是本地个人规划应用，没有用户账户与云端同步。公开部署 AI 接口前应添加访问控制及用量限制。
-
-### 统一任务拆解
-
-目标生成与每日行动生成共用第一性原理拆解准则。子目标通过 `parentId + parentStepId` 关联具体父步骤，生成日程时递归读取末级任务，保留来源路径、完成标准与前置行动，并按任务颗粒度检查行动时长。排期使用这些行动，不另起一份高层策略。生成后若子拆解改变，预览需重新生成。
-
-旧子目标只有父目标关联：打开子目标，在“这份子拆解对应的上层步骤”中明确选择。未关联的旧子目标会提示，不按标题自动匹配。已有子拆解的步骤再次点击会打开该拆解。多份子拆解对应同一步骤时需先明确保留哪份。
-
-已完成的末级任务不会重复安排。若末级任务已由另一份目标安排了未完成日程，当前生成会提示先移除冲突日程，再统一排期，避免父子计划重复占用时间。前置关系校验执行顺序并在日历中展示；不强制锁定完成勾选。
-
-### 从计划转向开始
-
-默认采用滚动阶段规划：本期行动受可用容量约束，未安排与部分完成的工作保存在目标的 `horizon.remainingWork` 中，包含原因及不确定估时。完成本期行动不代表完成整个来源步骤。严格截止日期模式仍要求全部工作可完成。排期器将超出容量的后续行动转为待安排工作，保持执行顺序；没有可执行行动的预览不能覆盖现有日程。
-
-首页与执行页优先显示“今天先做这一件”，只选择开始日期已到且前置行动已完成的任务。过去日期的未完成行动仍可继续，不触发清零或重建。完整清单、日历与日期调整在执行页默认收起。用户可选择“先做 5 分钟”，这只是开始承诺而非计时器，不自动勾选完成；“今天先到这里”保留开始记录，刷新后可继续。应用不以连续打卡或漏做惩罚推动执行。
-
-现状与验收标准为可选信息，缺少基础信息时提示模型优先生成小的诊断行动。阶段成果标明为预期，需实际执行后验收，不保证考试分数或长期目标结果。复盘日期是页面建议，不会自动通知或后台重排。
-
-## Development
+## For developers
 
 ```sh
 npm run typecheck
 npm test
 npm run build
-npm start
 ```
 
-Banner sources and update instructions: [README artwork](docs/readme/README.md).
+[Project guide](docs/guide.md) · [Artwork](docs/readme/README.md)
+
+---
+
+Made by [Songhai Fan](https://github.com/SonghaiFan) · A Frankie project
