@@ -1,0 +1,14 @@
+{
+  "repository": "frankie-goal",
+  "source_commit": "2c78937ed64e17515c7e780d5fdd8622c836d6ab",
+  "captured_on": "2026-11-05",
+  "source_state": "Current local working tree; existing uncommitted app edits were included where present.",
+  "materials": [
+    {
+      "file": "assets/ui.png",
+      "kind": "current local app screenshot",
+      "note": "Current empty goal archive and manual/AI goal entry form; no model request.",
+      "captured_on": "2026-11-05"
+    }
+  ]
+}

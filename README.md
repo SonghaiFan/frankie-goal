@@ -1,8 +1,16 @@
-# frankie-goal
+![Frankie Goal — current product banner](docs/readme/banner.png)
+
+# Frankie Goal
 
 将 **GoalBreaker-AI** 的目标拆解与 **planner** 的多尺度时间规划融合成一个 Next.js 应用：目标 → 阶段 → 行动 → 日程 → 完成。
 
-## 开始使用
+## Features
+
+- 拆解目标、阶段与行动，并保留父子目标和任务依赖。
+- 在可用容量内滚动规划每日行动，优先呈现今天可以开始的一件事。
+- 通过本地保存、笔记和 JSON 备份管理计划。
+
+## Getting started
 
 需要 Node.js 22.18+（或 Node.js 24+）和 npm。
 
@@ -14,7 +22,9 @@ npm run dev
 
 打开 http://localhost:3000。AI 拆解通过 [OpenRouter](https://openrouter.ai/docs/api/reference/streaming) 调用，使用服务端 `OPENROUTER_API_KEY`，可通过 `OPENROUTER_MODEL` 指定账户可用的模型；默认采用 `google/gemini-3.1-pro-preview`，也可换用 OpenRouter 上支持[结构化输出](https://openrouter.ai/docs/guides/features/structured-outputs)的模型。密钥不会被打包到浏览器。未配置密钥时，手动目标、行动、日程、笔记和备份仍可使用。
 
-## 工作流程
+## Project notes
+
+### 工作流程
 
 1. 在首页输入目标，使用 AI 拆解或手动创建。
 2. AI 生成分阶段方案、用时估算、复杂度与行动类型统计；复杂行动可继续拆解，保留上层目标关系和时间约束。支持中文、英文输出、流式预览、Markdown 复制和单目标 JSON 下载。
@@ -23,7 +33,7 @@ npm run dev
 5. “时间规划”保留季度、月、周、日视图、Markdown 笔记和颜色标签。目标日程提供独立的完成勾选；日历区块的时间进度表示时间流逝，不代表任务完成。
 6. 数据自动保存在当前浏览器中。使用“导出备份”导出目标、日程与时间规划的完整 JSON。
 
-## 旧数据与备份
+### 旧数据与备份
 
 “导入数据”支持：
 
@@ -35,16 +45,7 @@ npm run dev
 
 时间块使用稳定的日历标识，改变显示范围不会清空笔记。导入旧时间块时会转换旧标识。日期按浏览器本地时区处理，时间范围上限三年。
 
-## 验证
-
-```sh
-npm run typecheck
-npm test
-npm run build
-npm start
-```
-
-## 结构
+### 结构
 
 - `src/features/goals/`：由 GoalBreaker-AI 迁入的目标类型、结果展示、图表及服务端生成逻辑。
 - `src/app/api/goals/`：服务端 OpenRouter 流式生成接口。
@@ -54,7 +55,7 @@ npm start
 
 本项目是本地个人规划应用，没有用户账户与云端同步。公开部署 AI 接口前应添加访问控制及用量限制。
 
-## 统一任务拆解
+### 统一任务拆解
 
 目标生成与每日行动生成共用第一性原理拆解准则。子目标通过 `parentId + parentStepId` 关联具体父步骤，生成日程时递归读取末级任务，保留来源路径、完成标准与前置行动，并按任务颗粒度检查行动时长。排期使用这些行动，不另起一份高层策略。生成后若子拆解改变，预览需重新生成。
 
@@ -62,10 +63,21 @@ npm start
 
 已完成的末级任务不会重复安排。若末级任务已由另一份目标安排了未完成日程，当前生成会提示先移除冲突日程，再统一排期，避免父子计划重复占用时间。前置关系校验执行顺序并在日历中展示；不强制锁定完成勾选。
 
-## 从计划转向开始
+### 从计划转向开始
 
 默认采用滚动阶段规划：本期行动受可用容量约束，未安排与部分完成的工作保存在目标的 `horizon.remainingWork` 中，包含原因及不确定估时。完成本期行动不代表完成整个来源步骤。严格截止日期模式仍要求全部工作可完成。排期器将超出容量的后续行动转为待安排工作，保持执行顺序；没有可执行行动的预览不能覆盖现有日程。
 
 首页与执行页优先显示“今天先做这一件”，只选择开始日期已到且前置行动已完成的任务。过去日期的未完成行动仍可继续，不触发清零或重建。完整清单、日历与日期调整在执行页默认收起。用户可选择“先做 5 分钟”，这只是开始承诺而非计时器，不自动勾选完成；“今天先到这里”保留开始记录，刷新后可继续。应用不以连续打卡或漏做惩罚推动执行。
 
 现状与验收标准为可选信息，缺少基础信息时提示模型优先生成小的诊断行动。阶段成果标明为预期，需实际执行后验收，不保证考试分数或长期目标结果。复盘日期是页面建议，不会自动通知或后台重排。
+
+## Development
+
+```sh
+npm run typecheck
+npm test
+npm run build
+npm start
+```
+
+Banner sources and update instructions: [README artwork](docs/readme/README.md).

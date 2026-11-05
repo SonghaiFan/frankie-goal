@@ -1,0 +1,31 @@
+{
+  "title": "Goal",
+  "tagline": "Turn a goal into the next action.",
+  "category": "Planning / Daily action",
+  "layout": "screenshot",
+  "assets": [
+    {
+      "src": "assets/ui.png",
+      "fit": "contain",
+      "crop": [
+        222,
+        100,
+        1298,
+        486
+      ],
+      "source_size": [
+        1708,
+        1245
+      ]
+    }
+  ],
+  "signature": "assets/frankie.svg",
+  "provenance": [
+    {
+      "file": "assets/ui.png",
+      "kind": "current local app screenshot",
+      "note": "Current empty goal archive and manual/AI goal entry form; no model request.",
+      "captured_on": "2026-11-05"
+    }
+  ]
+}
