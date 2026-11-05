@@ -2,19 +2,19 @@
 
 # Frankie Goal
 
-把想做的事拆成行动，再为每天留出可以开始的时间。
+Break what you want to do into actions, then make room to start each day.
 
-[Guide](docs/guide.md) · [Run locally](#run-locally)
+[Guide (中文)](docs/guide.md) · [Run locally](#run-locally) · [中文](README.zh-CN.md)
 
 ## What it does
 
-- 拆解目标、阶段和行动，保留来源、依赖与完成标准。
-- 按可用时间滚动安排每日行动，先看今天能开始的一件事。
-- 用笔记、本地保存和 JSON 备份持续整理计划。
+- Break goals into stages and actions while retaining their source, dependencies and completion criteria.
+- Plan daily actions within available time and surface one thing you can start today.
+- Keep plans organized with notes, local storage and JSON backups.
 
 ## Run locally
 
-需要 Node.js 22.18+ 或 Node.js 24+。首次配置时：
+Requires Node.js 22.18+ or Node.js 24+. For a fresh checkout:
 
 ```sh
 npm ci
@@ -22,11 +22,11 @@ cp .env.example .env.local
 npm run dev
 ```
 
-打开 http://localhost:3000。AI 拆解使用服务端 `OPENROUTER_API_KEY`；模型可通过 `OPENROUTER_MODEL` 配置。
+Open http://localhost:3000. AI decomposition uses the server-side `OPENROUTER_API_KEY`; select a model through `OPENROUTER_MODEL`.
 
 ## Before you start
 
-不配置 key 也可以手动管理目标、行动、日程和备份。数据保存在当前浏览器，没有账户或云端同步。旧数据导入和父子任务迁移规则见项目指南。
+You can manage goals, actions, schedules and backups manually without an API key. Data stays in this browser, with no account or cloud sync. Legacy imports and parent/child task migration are covered in the project guide.
 
 ## For developers
 
@@ -36,7 +36,7 @@ npm test
 npm run build
 ```
 
-[Project guide](docs/guide.md) · [Artwork](docs/readme/README.md)
+[Project guide (中文)](docs/guide.md) · [Artwork](docs/readme/README.md)
 
 ---
 
