@@ -1,0 +1,162 @@
+{
+  "en": {
+    "title": "Turn goals into daily actions.",
+    "intro": "Break a goal into concrete work, fit it into your available time, and begin with one action.",
+    "open": "Open Goal",
+    "nav": [
+      "The workflow",
+      "First session",
+      "Screens"
+    ],
+    "name_note": "The current app is labelled franklin-goal. This is its Frankie repository introduction.",
+    "concept_title": "Connect the goal, the work and the day.",
+    "concept_intro": "The workspace connects three different decisions: what you want, what work it requires, and when you can actually do it.",
+    "concepts": [
+      [
+        "Goal → phases → steps",
+        "A goal keeps its purpose and summary. Phases group the work; steps describe actions, research, preparation or milestones, with estimated effort. A step can open an existing child breakdown or be broken down further."
+      ],
+      [
+        "Steps → daily actions",
+        "Daily planning follows the existing breakdown, including linked child plans. Actions retain their source path, completion criterion and prerequisites, so a small task still points back to its original purpose."
+      ],
+      [
+        "Daily actions → a start",
+        "The time page surfaces one unfinished action whose date and prerequisites permit it. Previously started work takes priority. “Start with 5 minutes” records a start; it is not a countdown and does not mark the task complete."
+      ]
+    ],
+    "planning_title": "Plan the next stretch, not an ideal future.",
+    "planning_intro": "Choose dates, weekdays, daily focused minutes and an action-size limit. You can add current circumstances and a definition of progress, but they are optional.",
+    "modes": [
+      [
+        "Rolling planning",
+        "Arrange a feasible first stage. Work that does not fit stays in the goal with an explanation, alongside an expected outcome and a review date."
+      ],
+      [
+        "Strict deadline",
+        "Try to fit the whole remaining scope into the chosen period. If the work or prerequisites cannot fit, the app reports the issue instead of quietly shortening the effort estimate."
+      ]
+    ],
+    "planning_note": "AI proposes actions; the scheduler checks dates, capacity and prerequisite order. Existing commitments and completed actions consume daily capacity. Review and edit the preview before applying it. Applying a new plan replaces this goal’s unfinished schedule and preserves completed actions.",
+    "manual_title": "You can start without AI.",
+    "manual_intro": "The manual route is fully usable: create a goal, add a step with an effort estimate, open “手动安排单个原始步骤”, choose a date, and add it to the schedule. You do not need to generate a whole plan first.",
+    "steps": [
+      [
+        "Write one goal",
+        "Describe an outcome and useful constraints. Choose manual creation, or use AI breakdown when the server has OpenRouter configured."
+      ],
+      [
+        "Add or inspect the work",
+        "Read the phases and steps. For manual goals, add an action. For generated plans, review the scope and open smaller breakdowns where needed."
+      ],
+      [
+        "Put work on a date",
+        "Schedule a step manually, or request a daily-plan preview with realistic availability. Applying the preview writes it to your local schedule."
+      ],
+      [
+        "Begin and return",
+        "Open Time planning. Start one eligible action, mark it complete when it is done, or stop and return later. Completed progress is not reset by a missed session."
+      ]
+    ],
+    "gallery_title": "Inside the current app",
+    "captions": [
+      "Goal entry and the manual route, before adding sample data.",
+      "Daily planning settings for a manually created sample goal. No AI plan was requested.",
+      "The real next-action screen after scheduling a sample step.",
+      "The focused start state. Starting is separate from completing.",
+      "The expandable calendar groups time into quarters, months, weeks and days."
+    ],
+    "storage_title": "Local records, optional online planning.",
+    "storage": "Goals, schedules, time-block notes and preferences are saved in this browser. There is no account or cross-device sync. Another browser or app address has its own records; clearing browser data can remove them.",
+    "ai": "AI breakdown and daily planning call the app’s server, which sends goal/planning context to OpenRouter. The deployment owner configures a server-side key and compatible model. The app does not ask visitors to paste a key. Manual creation, scheduling and notes do not need an AI request.",
+    "backup": "Export a JSON backup before changing browsers or importing data. A full workspace backup replaces goals, schedules and planner notes; planner-only data replaces the planner; supported goal-only files add plans with conflicting IDs remapped. The import dialog confirms replacement. Files are limited to 10 MB.",
+    "notes_title": "A calendar with room for notes",
+    "notes": "Expand the time calendar to inspect quarter, month, week and day blocks. Edit a block’s notes, status or tags and see scheduled actions on the corresponding day. This is a local planning workspace, not a connected external calendar.",
+    "run": "Run locally",
+    "run_note": "Start the Next.js app after installing dependencies. Configure OPENROUTER_API_KEY and a compatible OPENROUTER_MODEL on the server only if you want AI features. AI estimates and expected outcomes still need your review; they are not evidence that work is complete.",
+    "guide": "Screenshot & content update guide",
+    "source": "Source code",
+    "footer": "A Frankie project by Songhai Fan",
+    "skip": "Skip to content"
+  },
+  "zh": {
+    "title": "让目标，变成每天的行动。",
+    "intro": "把目标拆成具体工作，放进真实可用的时间，再从一个行动开始。",
+    "open": "打开 Goal",
+    "nav": [
+      "了解流程",
+      "初次使用",
+      "真实界面"
+    ],
+    "name_note": "当前应用界面名为 franklin-goal；此页面是它的 Frankie 仓库介绍。",
+    "concept_title": "连接目标、工作，与真实的一天。",
+    "concept_intro": "这个工作区把三个不同的问题连接起来：想达到什么、需要做哪些事，以及何时真的有时间做。",
+    "concepts": [
+      [
+        "目标 → 阶段 → 步骤",
+        "目标保留目的和摘要；阶段整理工作；步骤记录行动、研究、准备或里程碑及预计用时。一个步骤可以继续拆小，也可以打开已有的子拆解。"
+      ],
+      [
+        "步骤 → 每日行动",
+        "每日规划沿用现有拆解，包括已经关联的子计划。行动保留来源路径、完成标准和前置条件，拆小之后仍能看出它为什么存在。"
+      ],
+      [
+        "每日行动 → 真正开始",
+        "时间规划页只突出一个已到日期、前置条件满足的未完成行动，并优先续接已经开始的工作。“先做 5 分钟”记录开始，不是倒计时，也不会自动勾选完成。"
+      ]
+    ],
+    "planning_title": "先安排下一段，而不是理想中的全部未来。",
+    "planning_intro": "设置起止日期、可安排的星期、每天专注分钟数与行动颗粒度。也可补充现状和进展标准；不清楚时仍然可以先开始。",
+    "modes": [
+      [
+        "滚动阶段规划",
+        "先安排本期可行的一段。放不下的工作仍保留在目标里，并说明原因，同时记录本期预期成果和复盘日期。"
+      ],
+      [
+        "严格截止日期",
+        "尝试在所选时间内完成全部剩余范围。如果工作量或前置条件放不下，应用会说明问题，而不是悄悄缩短工作估时。"
+      ]
+    ],
+    "planning_note": "AI 提出行动，排程逻辑检查日期、容量与前置顺序。其他目标的安排和已完成行动会占用当天额度。应用前先审阅、修改预览；重新应用会替换本目标未完成的日程，保留已完成项。",
+    "manual_title": "不使用 AI，也能开始。",
+    "manual_intro": "可以手动创建目标，添加行动及预计用时，展开“手动安排单个原始步骤”，选好日期并加入日程。不需要先生成一整份计划。",
+    "steps": [
+      [
+        "写下一个目标",
+        "描述想达到的结果和实际限制。可以手动创建；服务端配置好 OpenRouter 后，也可以让 AI 拆解。"
+      ],
+      [
+        "添加或审阅工作",
+        "阅读阶段和步骤。手动目标可直接添加行动；生成的计划则先检查范围，需要时继续拆小。"
+      ],
+      [
+        "把工作安排到日期",
+        "手动安排步骤，或按实际时间请求每日计划预览。确认应用后，预览才写入本地日程。"
+      ],
+      [
+        "开始，也可以稍后继续",
+        "打开时间规划，先做一个满足条件的行动。做完再标记完成，也可以今天先到这里。错过一次安排不会清空已完成进度。"
+      ]
+    ],
+    "gallery_title": "当前应用里的真实界面",
+    "captions": [
+      "目标输入与手动创建入口，此时尚未添加示例数据。",
+      "手动创建示例目标后的每日规划设置；没有请求 AI 生成。",
+      "示例步骤加入日程后的“今天先做这一件”。",
+      "开始后的聚焦状态。开始和完成是两个独立操作。",
+      "展开后的时间日历按季度、月、周、日组织。"
+    ],
+    "storage_title": "本地记录，可选的在线规划。",
+    "storage": "目标、日程、时间块笔记与偏好保存在当前浏览器，没有账号和跨设备同步。不同浏览器或应用地址拥有独立记录；清除浏览器数据可能删除它们。",
+    "ai": "AI 拆解与每日规划会调用应用服务端，再把目标及规划上下文发送到 OpenRouter。部署者配置服务端 key 和兼容模型；界面不要求访客粘贴 key。手动创建、安排日期和写笔记不需要 AI 请求。",
+    "backup": "更换浏览器或导入前先导出 JSON 备份。完整工作区备份会替换目标、日程和时间块笔记；仅规划文件替换规划；兼容的仅目标文件会追加目标，并为冲突 ID 重新编号。导入对话框会确认替换，文件上限 10 MB。",
+    "notes_title": "日历里，也能留下笔记",
+    "notes": "展开时间日历，查看季度、月、周、日的时间块。可编辑笔记、状态与标签，对应日期也能看到已安排的行动。这是本地规划工作区，没有连接外部日历。",
+    "run": "本地运行",
+    "run_note": "安装依赖后启动 Next.js。只有需要 AI 功能时，才在服务端配置 OPENROUTER_API_KEY 与兼容的 OPENROUTER_MODEL。AI 的估时和预期成果仍需审阅，不代表工作已经完成。",
+    "guide": "截图与内容更新指南",
+    "source": "源代码",
+    "footer": "Songhai Fan 的 Frankie 系列项目",
+    "skip": "跳至内容"
+  }
+}

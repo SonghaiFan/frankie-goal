@@ -1,46 +1,53 @@
-# Introduction page maintenance / 介绍页维护
+# Goal introduction maintenance / 介绍页维护
 
-[English README](../README.md) · [中文 README](../README.zh-CN.md)
+The introduction is a separate static site. English is `/`; Chinese is `/zh/`. The product currently labels itself **franklin-goal**, while the repository remains `frankie-goal`. Do not rename the app as part of an introduction update.
 
-## Two destinations / 两个入口
+介绍页是独立静态站点，英文为根路径，中文为 `/zh/`。当前产品界面名为 **franklin-goal**，仓库名仍为 `frankie-goal`；不要因为更新介绍页而更改应用品牌。
 
-- Introduction / 介绍页: https://songhaifan.github.io/frankie-goal/
-- App / 应用: https://frankie-goal.vercel.app
-- The introduction is a standalone static site. It never builds the app or reads environment files. / 介绍页独立构建，不构建应用，也不读取环境变量文件。
-- English is the default; `zh/` is the Chinese version. / 英文默认，中文位于 `zh/`。
-
-## Files to update / 更新哪些文件
-
-| Source / 来源 | What it shows / 内容 |
-| --- | --- |
-| `docs/readme/assets/ui.png` | Current product interface and original assets. |
-
-- `../README.md` and `../README.zh-CN.md`: product introduction, features, setup, limitations and developer commands. Update both languages together. / 同步维护双语介绍、功能、运行步骤与限制。
-- `project.json`: app URL, repository, category, colors, three user steps and the ordered media list. / 应用链接、仓库、分类、颜色、使用步骤与有序素材列表。
-- `style.css`: this app's visual treatment within the shared layout. / 统一结构下的项目视觉风格。
-- `build.py`: portable standard-library renderer. / 可独立使用的 Python 标准库构建器。
-
-## Replacing screenshots and GIFs / 替换截图和动图
-
-1. Run the current app and capture real, settled UI. Use synthetic or guest data; hide credentials and private content. For GIFs, record a real interaction from start to finish, rather than animating a static screenshot. / 运行当前版本，使用访客或示例数据采集稳定画面；GIF 应录制真实操作，不把静态图伪装成操作录像。
-2. Replace the corresponding source file above when its screen changes. These banner assets are shared with the README; replacing them may update both the banner and this page. Keep `docs/readme/source-version.json` and banner provenance accurate. / 界面变化后替换对应文件；共享素材会同时影响 banner，需同步更新来源记录。
-3. For a new screen or GIF, add it under `site/assets/` and add an entry to `project.json` → `media` with `src`, bilingual `caption`, and optionally `captured_on` / `source_revision`. The first item is the hero; the full list is the gallery. Use a GIF's first frame as an informative resting frame, keep files small, and provide a still alternative. / 新素材放到 `site/assets/`，登记双语说明、采集时间和版本；第一项为主图，其余进入画廊。GIF 应有可读首帧并保留静态替代图。
-4. If app behavior changes, update both READMEs and both `steps` arrays. Native screenshots and shared family artwork must be labelled honestly. / 行为变化时同步更新双语 README 和使用步骤；区分原生截图与系列共享素材。
-5. Build and inspect desktop and mobile, in both languages. Check the app link and every image. / 构建后检查桌面、手机和两种语言，验证链接与所有图片。
+## Build and preview / 构建预览
 
 ```sh
-python3 site/build.py
-python3 -m http.server 8080 --directory _site --bind 127.0.0.1
+python3 site/build.py --out _site
+python3 -m http.server 8300 --bind 127.0.0.1 --directory _site
 ```
 
-Open http://127.0.0.1:8080/ and http://127.0.0.1:8080/zh/.
+Check `/` and `/zh/` at desktop and phone widths. Confirm no horizontal overflow, readable hero crop, all images loading, keyboard focus and working `#use` / `#start` links. No Node app build, API key or environment file is needed for this static build. The existing `.github/workflows/pages.yml` publishes `_site`.
+
+同时检查中英文的桌面与手机布局、图片、键盘焦点，以及 `#use` / `#start` 链接。静态构建不需要应用构建、API key 或环境文件。
+
+## Which assets to refresh / 哪些素材需要替换
+
+All current screenshots are actual browser captures at 1468×1247, taken on 2026-11-06. They show a clearly labelled manual sample, never an invented AI response. Save originals without painting over the app. The hero uses a CSS crop of `planning-current.png`; full captures remain linked in the gallery.
+
+| File under `site/assets/` | Capture flow | Replace after changes to |
+| --- | --- | --- |
+| `home-current.png` | Open a fresh Goal app origin with no records | `src/app/page.tsx`, `AppNavigation.tsx`, entry form/branding |
+| `planning-current.png` | Create “Sample: publish a small portfolio” manually, add “Sample: choose three portfolio projects”, estimate30minutes | `DailyPlanBuilder.tsx`, plan settings, phase display |
+| `next-current.png` | Expand manual scheduling, choose today, add the step, open `/plan` | `NextAction.tsx`, `src/app/plan/page.tsx` |
+| `focus-current.png` | Click “先做5分钟” on that sample | start/pause/completion interaction |
+| `calendar-current.png` | Expand “查看时间日历” | `TimeBlockView.tsx`, `TimeBlock.tsx`, time-block editing |
+| copied `docs/readme/banner.png` | Existing approved banner; no redraw in this build | banner assets/version |
+| copied `docs/readme/assets/frankie.svg` | Existing family signature | signature changes |
+
+使用新浏览器来源或没有个人记录的测试环境。只创建清楚标注的示例目标；不要截图真实私人目标，不要为了补图调用付费 AI。截图后删除自己新建的示例，保留原先的数据。若刷新需要 AI 结果，请先取得允许并使用明确标注的非私人示例；不要把手动样例伪装成 AI 结果。
+
+## Content source map / 内容核对来源
+
+Edit both languages in `site/content.json`, not README-derived text. Match the current app palette/type/radii in `site/style.css`; layout and metadata are in `site/build.py`.
+
+- Brand/tokens: `src/components/AppNavigation.tsx`, `tailwind.config.ts`, `src/app/globals.css`.
+- Goal/manual step flow: `src/app/page.tsx`, `src/features/goals/components/PlanDisplay.tsx`.
+- Goal hierarchy and provenance: `src/lib/decomposition.ts`.
+- Rolling/strict planning, budget, action granularity and editable preview: `src/components/DailyPlanBuilder.tsx`, `src/lib/daily-plan.ts`, `src/app/api/daily-plan/route.ts`.
+- Start eligibility and resumed work: `src/lib/next-action.ts`, `src/components/NextAction.tsx`.
+- Time-block notes/status/tags and scheduled actions: `TimeBlockView.tsx`, `TimeBlockDialog.tsx`, `ScheduledTasks.tsx`.
+- Local storage, import variants and replace behavior: `src/lib/store.ts`, `src/lib/goal-data.ts`, `src/components/DataControls.tsx`.
+- Online context and provider requirements: `src/features/goals/client.ts`, `src/features/goals/server/openrouter.ts`, API routes. Never copy `.env` values into the intro.
+
+Changing completion criteria, storage, AI provider, import semantics or scheduling logic requires copy review even if screenshots look unchanged. Do not claim a five-minute timer, automatic completion, guaranteed results, cloud sync, external-calendar integration or free hosted AI unless those features have actually been implemented and verified.
+
+即使截图没变化，只要完成标准、存储、AI 服务、导入规则或排程逻辑变化，也要同步核对文案。修改后重新构建两种语言，再走一次手动创建、安排日期、开始与暂停流程。
 
 ## Publishing / 发布
 
-Push the reviewed page changes to `main`. `.github/workflows/pages.yml` publishes only `_site/` to GitHub Pages. App deployment remains separate on Vercel for browser apps; API services and native/local apps retain their own runtime. Never include `.env` files or unrelated work in a page commit. / 推送审核后的页面改动到 `main`，工作流只发布 `_site/`；应用与 API 的部署分别管理，勿提交环境变量文件或其他未完成代码。
-
-If the branch or repository owner changes, update `project.json`, the workflow branch and README introduction links. / 分支或仓库所有者变化时，同步修改配置、工作流与介绍页链接。
-
-## App signature / 应用签名
-
-The app signature uses `public/frankie-signature.svg`, copied from the approved `docs/readme/assets/frankie.svg`. It links to this introduction page. / 应用签名使用已确认的系列 SVG，并链接到介绍页。
+Commit only reviewed `site/` changes and relevant Pages workflow updates. Do not include unrelated application edits. Push to `main`, wait for the Pages workflow to succeed, then inspect the live English and Chinese URLs. This work does not require a Vercel app redeploy.
