@@ -1,0 +1,49 @@
+{
+  "repository": "SonghaiFan/frankie-goal",
+  "branch": "main",
+  "pages_url": "https://songhaifan.github.io/frankie-goal/",
+  "kind": "online",
+  "app_url": "https://frankie-goal.vercel.app",
+  "vercel_project": "frankie-goal",
+  "accent": "#536ab0",
+  "tint": "#f4f5fa",
+  "category": {
+    "en": "Plans / Begin",
+    "zh": "计划 / 开始"
+  },
+  "steps": {
+    "en": [
+      "Write down a goal and break it into actions.",
+      "Fit the next actions into your available time.",
+      "Start one action, review progress and export a backup."
+    ],
+    "zh": [
+      "写下目标，拆成行动。",
+      "根据可用时间安排下一步。",
+      "开始一件事，回看进度并导出备份。"
+    ]
+  },
+  "media": [
+    {
+      "src": "docs/readme/assets/ui.png",
+      "caption": {
+        "en": "Current product interface and original assets.",
+        "zh": "项目真实界面或原始素材。"
+      },
+      "crop": [
+        222,
+        100,
+        1298,
+        486
+      ],
+      "source_size": [
+        1708,
+        1245
+      ]
+    }
+  ],
+  "art_note": {
+    "en": "Current product interface and original assets.",
+    "zh": "素材来自项目当前界面与原始资源。"
+  }
+}

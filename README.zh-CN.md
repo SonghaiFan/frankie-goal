@@ -6,7 +6,7 @@
 
 把想做的事拆成行动，再为每天留出可以开始的时间。
 
-[项目指南](docs/guide.md) · [本地运行](#本地运行)
+[介绍页](https://songhaifan.github.io/frankie-goal/zh/) · [项目指南](docs/guide.md) · [本地运行](#本地运行)
 
 ## 可以做什么
 

@@ -44,3 +44,6 @@ next-env.d.ts
 !.env.example
 /output/
 /.playwright-cli/
+
+# Standalone introduction build
+/_site/

@@ -6,7 +6,7 @@
 
 Break what you want to do into actions, then make room to start each day.
 
-[Guide (中文)](docs/guide.md) · [Run locally](#run-locally)
+[Introduction](https://songhaifan.github.io/frankie-goal/) · [Guide (中文)](docs/guide.md) · [Run locally](#run-locally)
 
 ## What it does
 
