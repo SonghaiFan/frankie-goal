@@ -7,7 +7,7 @@ export function AppNavigation() {
     <nav aria-label="主导航" className="border-b bg-paper">
       <div className="mx-auto max-w-7xl px-5 py-4 flex flex-wrap items-center justify-between gap-4">
         <Link href="/" className="font-semibold tracking-tight text-xl">
-          franklin-goal
+          Frankie Goal
           <span className="ml-2 text-xs font-normal text-muted-foreground">
             让目标有时间落地
           </span>

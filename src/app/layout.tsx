@@ -6,7 +6,9 @@ import { Suspense } from "react";
 
 
 export const metadata: Metadata = {
-  title: "franklin-goal",
+  title: "Frankie Goal",
+  manifest: "/site.webmanifest",
+  icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.png" },
   description: "Break goals into actions and make time for them.",
 };
 

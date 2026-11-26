@@ -27,5 +27,6 @@
       "note": "Current empty goal archive and manual/AI goal entry form; no model request.",
       "captured_on": "2026-11-05"
     }
-  ]
+  ],
+  "icon": "assets/icon.svg"
 }
